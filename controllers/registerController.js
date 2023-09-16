@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const isValidEmail = require('./isValidEmail');
 
 const handleNewUser = async (req, res) => {
     const { username, email, password } = req?.body;
@@ -35,12 +36,6 @@ const handleNewUser = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-};
-
-const isValidEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    return emailRegex.test(email);
 };
 
 module.exports = handleNewUser;

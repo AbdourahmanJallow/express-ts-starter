@@ -23,10 +23,13 @@ app.use(express.json()); // MIDDLEWARE FOR BUILT-IN JSON
 app.use(cookieParser()); // MIDDLEWARE FOR COOKIES
 
 app.use('/register', require('./routes/register'));
+app.use('/auth', require('./routes/auth'));
 
 app.use(errorLogger); //Custom error logger
 
 mongoose.connection.once('open', () => {
     console.log('MongoDB connected succesfully');
-    app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+    app.listen(PORT, () =>
+        console.log(`Server listening for requests on port ${PORT}`)
+    );
 });
