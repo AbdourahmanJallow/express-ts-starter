@@ -4,34 +4,41 @@ const isValidEmail = require('./isValidEmail');
 const jwt = require('jsonwebtoken');
 
 const handleLogin = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req?.body;
 
     if (!email || !password)
         return res
-            .status(400)
-            .json({ message: 'Email and password must be privided' });
+            .status(400) //bad request
+            .json({ message: 'Email and password must be provided' });
 
     if (!isValidEmail(email))
-        return res.status(400).json({ message: 'Enter a valid email' });
+        return res.status(406).json({ message: 'Enter a valid email' }); //not acceptable
 
     try {
-        const user = await User.findOne({ email: email }).exec();
-        if (!user) return res.status(401);
+        const user = await User.findOne({ email }).exec();
+        if (!user) return res.status(401); //Unauthorized
 
-        const match = await bcrypt.compare(password, user.password);
-        if (match) {
-            // const userRoles = Object.values(user.roles);
+        const matchedUser = await bcrypt.compare(password, user.password);
+        if (matchedUser) {
+            const userRoles = Object.values(user.roles);
             // Create JWT and Refresh token
             const accessToken = jwt.sign(
                 {
-                    username: user.username
+                    UserInfo: {
+                        email: user.email,
+                        roles: userRoles
+                    }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: '180s' }
             );
+
             const refreshToken = jwt.sign(
                 {
-                    username: user.username
+                    UserInfo: {
+                        email: user.email,
+                        roles: userRoles
+                    }
                 },
                 process.env.REFRESH_TOKEN_SECRET,
                 { expiresIn: '1d' }

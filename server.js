@@ -16,14 +16,17 @@ app.use(customLogger); // CUSTOM MIDDLEWARE LOGGER
 
 app.use(cors(corsOptions));
 
-app.use(express.urlencoded({ extended: false })); // MIDDLEWARE  FOR URL ENCODED  FORM DATA
+app.use(express.urlencoded({ extended: false })); // MIDDLEWARE  FOR URL ENCODED FORM DATA
 
 app.use(express.json()); // MIDDLEWARE FOR BUILT-IN JSON
 
 app.use(cookieParser()); // MIDDLEWARE FOR COOKIES
 
+// Routes
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
+app.use('/refresh', require('./routes/refresh'));
+app.use('/logout', require('./routes/logout'));
 
 app.use(errorLogger); //Custom error logger
 
