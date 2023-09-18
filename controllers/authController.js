@@ -12,11 +12,11 @@ const handleLogin = async (req, res) => {
             .json({ message: 'Email and password must be provided' });
 
     if (!isValidEmail(email))
-        return res.status(406).json({ message: 'Enter a valid email' }); //not acceptable
+        return res.status(406).json({ message: 'Enter a valid email address' }); //not acceptable
 
     try {
         const user = await User.findOne({ email }).exec();
-        if (!user) return res.status(401); //Unauthorized
+        if (!user) return res.sendStatus(401); //Unauthorized
 
         const matchedUser = await bcrypt.compare(password, user.password);
         if (matchedUser) {

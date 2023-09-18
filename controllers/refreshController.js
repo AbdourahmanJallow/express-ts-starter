@@ -8,25 +8,18 @@ const handleUserRefreshToken = async (req, res) => {
     if (!cookies?.jwt) return res.sendStatus(401); //Unauthorized
     const refreshToken = cookies?.jwt;
 
-    console.log('Refresh Token');
-    console.log(refreshToken);
-
     //find user with refreshToken
     try {
         const user = await User.findOne({ refreshToken }).exec();
-        console.log(user);
-        console.log('Inside refresh token');
         if (!user) return res.sendStatus(403); //forbidden
 
         jwt.verify(
             refreshToken,
             process.env.REFRESH_TOKEN_SECRET,
             (err, data) => {
-                console.log('data: ', data);
                 const userRoles = Object.values(user.roles);
                 if (err || data.UserInfo.email !== user.email)
                     return res.sendStatus(403);
-                console.log('Crossed checkpoint');
                 const accessToken = jwt.sign(
                     {
                         UserInfo: {

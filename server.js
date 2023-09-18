@@ -9,6 +9,7 @@ const customLogger = require('./middleware/logger');
 const errorLogger = require('./middleware/errorLogger');
 const connectMongoDB = require('./config/dbConnection');
 const mongoose = require('mongoose');
+const verifyAccess = require('./middleware/verifyJwtAccess');
 
 connectMongoDB();
 
@@ -27,6 +28,8 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
+
+app.use('/employees', require('./routes/api/employees'));
 
 app.use(errorLogger); //Custom error logger
 

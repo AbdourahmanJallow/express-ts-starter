@@ -1,7 +1,7 @@
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
 
 const handleLogout = async (req, res) => {
+    // clear cookie on client and server side
     const cookies = req?.cookies;
     const refreshToken = cookies.jwt;
 
@@ -21,7 +21,7 @@ const handleLogout = async (req, res) => {
         res.clearCookie('jwt', {
             httpOnly: true
         });
-        console.log('logout completed');
+
         res.sendStatus(204);
     } catch (err) {
         console.log(err);

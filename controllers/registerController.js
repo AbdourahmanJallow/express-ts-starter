@@ -11,9 +11,7 @@ const handleNewUser = async (req, res) => {
         });
 
     if (!isValidEmail(email))
-        return res
-            .status(400)
-            .json({ message: 'Please enter a valid email address' });
+        return res.status(406).json({ message: 'Enter a valid email address' });
 
     // Check for duplicate
     const duplicate = await User.findOne({ username }).exec();
