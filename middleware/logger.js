@@ -1,5 +1,5 @@
 const customLogger = (req, res, next) => {
-    console.log(`${req.method}  ${req.url}`);
+    console.log(`${req.hostname}\t ${req.method}\t ${req.url}`);
     next();
 };
 

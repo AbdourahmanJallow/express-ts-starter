@@ -29,6 +29,8 @@ app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
 
+// Protected Routes
+app.use(verifyAccess);
 app.use('/employees', require('./routes/api/employees'));
 
 app.use(errorLogger); //Custom error logger

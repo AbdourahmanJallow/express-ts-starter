@@ -10,8 +10,8 @@ const {
 
 router
     .route('/')
-    .post(createNewEmployee)
     .get(getAllEmployees)
+    .post(createNewEmployee)
     .put(updateEmployee)
     .delete(deleteEmployee);
 

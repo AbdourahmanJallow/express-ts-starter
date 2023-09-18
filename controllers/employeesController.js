@@ -21,7 +21,7 @@ const createNewEmployee = async (req, res) => {
         console.log(result);
         res.status(201).json({ result });
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 };
 
@@ -55,7 +55,7 @@ const updateEmployee = async (req, res) => {
         console.log(result);
         res.json(result);
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 };
 
@@ -76,7 +76,7 @@ const deleteEmployee = async (req, res) => {
         console.log(result);
         res.json(result);
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 };
 
@@ -86,7 +86,6 @@ const getEmployee = async (req, res) => {
         return res.status(400).json({ message: 'Employee ID required' });
 
     try {
-        error;
         const employee = await Employee.findOne({ _id: employeeId });
         if (!employee)
             return res.status(403).json({ message: 'Employee does not exist' });
@@ -94,7 +93,7 @@ const getEmployee = async (req, res) => {
         console.log(employee);
         res.json(employee);
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 };
 

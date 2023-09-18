@@ -3,7 +3,8 @@ const User = require('../models/User');
 const handleLogout = async (req, res) => {
     // clear cookie on client and server side
     const cookies = req?.cookies;
-    const refreshToken = cookies.jwt;
+    if (!cookies?.jwt) return res.sendStatus(204);
+    const refreshToken = cookies?.jwt;
 
     try {
         const user = await User.findOne({ refreshToken }).exec();
@@ -24,7 +25,7 @@ const handleLogout = async (req, res) => {
 
         res.sendStatus(204);
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 };
 
