@@ -4,15 +4,17 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: [true, 'Username must be provided']
     },
     email: {
         type: String,
-        required: true
+        required: [true, 'Email must be provided'],
+        unique: true
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'Password must be provided'],
+        minLength: 8
     },
     roles: {
         User: {

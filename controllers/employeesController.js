@@ -28,7 +28,7 @@ const createNewEmployee = async (req, res) => {
 const getAllEmployees = async (req, res) => {
     const employees = await Employee.find().exec();
 
-    if (!employees)
+    if (!employees.length)
         return res.status(204).json({ message: 'No employees found' });
 
     res.json(employees);
