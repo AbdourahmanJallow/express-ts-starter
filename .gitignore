@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 .env
 node_modules
+=======
+node_modules
+dist
+.env
+>>>>>>> 95081be (set up express starter)

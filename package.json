@@ -1,21 +1,31 @@
 {
-    "name": "auth",
-    "version": "1.0.0",
-    "description": "user registration and authentication",
-    "main": "server.js",
-    "scripts": {
-        "start": "node server",
-        "dev": "nodemon server"
-    },
-    "author": "mrX",
-    "license": "ISC",
-    "dependencies": {
-        "bcrypt": "^5.1.1",
-        "cookie-parser": "^1.4.6",
-        "cors": "^2.8.5",
-        "dotenv": "^16.3.1",
-        "express": "^4.18.2",
-        "jsonwebtoken": "^9.0.2",
-        "mongoose": "^7.5.2"
-    }
+  "name": "project-name",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && nodemon dist/server.js",
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "build": "tsc",
+    "lint": "eslint \"src/**/*.ts\" --config eslint.config.mjs"
+  },
+  "keywords": [],
+  "author": "dex",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.10",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "mongoose": "^8.9.5",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.21.0"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
 }
